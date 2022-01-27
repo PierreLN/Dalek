@@ -18,6 +18,9 @@ class Controleur:
             self.vue.map_visuelle = []
             compte_zappeur_actuel_docteur = self.modele.partie_courante.docteur.compte_zappeur
             compte_zappeur_actuel_docteur += 1
+            self.modele.partie_courante.creer_aire_jeu(self.vue)
+            self.modele.partie_courante.creer_docteur()
+            self.modele.partie_courante.creer_dalek()
             self.vue.demarrer_partie(self.modele.partie_courante)
             return True
         return False
