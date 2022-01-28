@@ -178,6 +178,11 @@ class Partie:
             if affichage.map_visuelle[self.docteur.y - 1][self.docteur.x] == 'f':
                 return False
         elif direction == 'd':
+            # if affichage.map_visuelle[self.docteur.y][self.docteur.x + 1] == 'f' and self.docteur.x != self.x - 1:
+            #     return False
+            # elif affichage.map_visuelle[self.docteur.y][self.docteur.x] == 'f' and self.docteur.x == self.x - 1:
+            #     return False
+            
             if affichage.map_visuelle[self.docteur.y][self.docteur.x + 1] == 'f':
                 return False
         elif direction == 's':
