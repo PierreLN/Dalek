@@ -113,7 +113,7 @@ class Partie:
         reponse = affichage.afficher_menu_jeu()
 
         if reponse in "wdsae":
-            if not self.tas_ferraille_est_devant_docteur(affichage, reponse):
+            if self.tas_ferraille_est_devant_docteur(affichage, reponse):
                 self.docteur.deplacer_docteur(reponse, self)
                 affichage.effacer_position_precedente_docteur()
                 affichage.positionner_docteur(self)
@@ -172,19 +172,19 @@ class Partie:
     def tas_ferraille_est_devant_docteur(self, affichage, direction):
         if direction == 'w':
             if affichage.map_visuelle[self.docteur.y - 1][self.docteur.x] == 'f':
-                return True
+                return False
         elif direction == 'd':
             if affichage.map_visuelle[self.docteur.y][self.docteur.x + 1] == 'f':
-                return True
+                return False
         elif direction == 's':
             if affichage.map_visuelle[self.docteur.y + 1][self.docteur.x] == 'f':
-                return True
+                return False
         elif direction == 'a':
             if affichage.map_visuelle[self.docteur.y][self.docteur.x - 1] == 'f':
-                return True
+                return False
         else:
             pass
-        return False
+        return True
 
     def positionner_dalek(self, affichage):
         for k in self.dalek:
@@ -228,12 +228,12 @@ class Docteur:
             else:
                 print("Limite supérieur de la matrice atteint; tour perdu")
         elif direction == 'd':
-            if self.x < partie.x:
+            if self.x < partie.x - 1:
                 self.x += 1
             else:
                 print("Limite droite de la matrice atteinte; tour perdu")
         elif direction == 's':
-            if self.y < partie.y:
+            if self.y < partie.y - 1:
                 self.y += 1
             else:
                 print("Limite inférieure de la matrice atteinte; tour perdu")
