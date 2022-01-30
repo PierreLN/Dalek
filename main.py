@@ -49,8 +49,8 @@ class Partie:
         self.niveau = 1
         self.score = 0
         self.mode = None
-        self.x = 16
-        self.y = 16
+        self.x = 10
+        self.y = 10
         self.docteur = None
         self.dalek = []
         self.ferrailles = []
@@ -113,7 +113,7 @@ class Partie:
         reponse = affichage.afficher_menu_jeu()
 
         if reponse in "wdsae":
-            if self.tas_ferraille_est_devant_docteur(affichage, reponse):
+            if not self.tas_ferraille_est_devant_docteur(affichage, reponse):
                 self.docteur.deplacer_docteur(reponse, self)
                 affichage.effacer_position_precedente_docteur()
                 affichage.positionner_docteur(self)
@@ -172,28 +172,20 @@ class Partie:
 # il ne peux pas verifier en dehors de la matrice
 # ferraille ne meur pas tous en cas de colision de plus de 2
 # des Dalek invisibles
-# des deplacements vers le bas et droite bugger apres le mur
     def tas_ferraille_est_devant_docteur(self, affichage, direction):
         if direction == 'w':
             if affichage.map_visuelle[self.docteur.y - 1][self.docteur.x] == 'f':
-                return False
-        elif direction == 'd':
-            # if affichage.map_visuelle[self.docteur.y][self.docteur.x + 1] == 'f' and self.docteur.x != self.x - 1:
-            #     return False
-            # elif affichage.map_visuelle[self.docteur.y][self.docteur.x] == 'f' and self.docteur.x == self.x - 1:
-            #     return False
-            
+                return True
+        elif direction == 'd' and self.docteur.x != self.x - 1:
             if affichage.map_visuelle[self.docteur.y][self.docteur.x + 1] == 'f':
-                return False
-        elif direction == 's':
+                return True
+        elif direction == 's' and self.docteur.y + 1 != self.y:
             if affichage.map_visuelle[self.docteur.y + 1][self.docteur.x] == 'f':
-                return False
+                return True
         elif direction == 'a':
             if affichage.map_visuelle[self.docteur.y][self.docteur.x - 1] == 'f':
-                return False
-        else:
-            pass
-        return True
+                return True
+        return False
 
     def positionner_dalek(self, affichage):
         for k in self.dalek:
