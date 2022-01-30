@@ -169,9 +169,6 @@ class Partie:
         if not partie_termine:
             self.afficher_menu_jeu(affichage, controleur)
 
-# il ne peux pas verifier en dehors de la matrice
-# ferraille ne meur pas tous en cas de colision de plus de 2
-# des Dalek invisibles
     def tas_ferraille_est_devant_docteur(self, affichage, direction):
         if direction == 'w':
             if affichage.map_visuelle[self.docteur.y - 1][self.docteur.x] == 'f':
@@ -198,9 +195,6 @@ class Partie:
                 for k2 in self.dalek:
                     if k2.y == collision_y and k2.x == collision_x:
                         self.dalek.remove(k2)
-                        # for k3 in self.dalek:
-                        #     if k3.y == collision_y and k3.x == collision_x:
-                        #         self.dalek.remove(k3)
                 nouveau_tas_ferraille = Ferraille(len(self.ferrailles) + 1)
                 nouveau_tas_ferraille.x = collision_x
                 nouveau_tas_ferraille.y = collision_y
